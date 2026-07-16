@@ -1,0 +1,102 @@
+{
+  "entities": {
+    "Reservation": {
+      "title": "Reservation",
+      "description": "Table bookings at the café.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "maxLength": 100 },
+        "email": { "type": "string", "format": "email" },
+        "date": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+        "time": { "type": "string" },
+        "guests": { "type": "integer" },
+        "occasion": { "type": "string" },
+        "notes": { "type": "string", "maxLength": 1000 },
+        "status": { "type": "string", "enum": ["pending", "confirmed", "rejected"] },
+        "createdAt": { "type": "string" },
+        "emailSent": { "type": "boolean" },
+        "emailSentAt": { "type": "string" },
+        "confirmationEmailBody": { "type": "string" }
+      },
+      "required": ["name", "email", "date", "time", "guests", "status"]
+    },
+    "Order": {
+      "title": "Order",
+      "description": "Online pickup orders.",
+      "type": "object",
+      "properties": {
+        "items": { "type": "array" },
+        "subtotal": { "type": "number" },
+        "discount": { "type": "number" },
+        "total": { "type": "number" },
+        "status": {
+          "type": "string",
+          "enum": ["pending", "preparing", "ready", "completed", "cancelled"]
+        },
+        "customerName": { "type": "string", "maxLength": 100 },
+        "customerEmail": { "type": "string", "format": "email" },
+        "pickupTime": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": [
+        "items",
+        "subtotal",
+        "discount",
+        "total",
+        "status",
+        "customerName",
+        "customerEmail"
+      ]
+    },
+    "Review": {
+      "title": "Review",
+      "description": "Guest satisfaction logs.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "maxLength": 100 },
+        "role": { "type": "string", "maxLength": 100 },
+        "rating": { "type": "integer" },
+        "text": { "type": "string", "maxLength": 500 },
+        "avatar": { "type": "string" },
+        "approved": { "type": "boolean" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["name", "role", "rating", "text", "approved"]
+    },
+    "MenuItem": {
+      "title": "MenuItem",
+      "description": "A food, coffee, or pastry product offered on the menu.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "maxLength": 100 },
+        "description": { "type": "string", "maxLength": 500 },
+        "price": { "type": "number" },
+        "calories": { "type": "integer" },
+        "category": { "type": "string" },
+        "veg": { "type": "boolean" },
+        "popular": { "type": "boolean" },
+        "available": { "type": "boolean" },
+        "image": { "type": "string" }
+      },
+      "required": ["name", "description", "price", "category"]
+    }
+  },
+  "firestore": {
+    "reservations": {
+      "schema": "Reservation",
+      "description": "Inbound guest seat requests."
+    },
+    "orders": {
+      "schema": "Order",
+      "description": "Online checkout baskets."
+    },
+    "reviews": {
+      "schema": "Review",
+      "description": "Customer comments and ratings."
+    },
+    "menu": {
+      "schema": "MenuItem",
+      "description": "Food and drink options catalogued in the database."
+    }
+  }
+}

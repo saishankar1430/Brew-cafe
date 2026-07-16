@@ -1,0 +1,6 @@
+{
+  "name": "Velvet Brew Studio",
+  "description": "Velvet Brew Studio is a premium coffee shop and bistro web application built with React, Tailwind CSS, and TanStack Start, featuring menus, reservations, and reviews.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
